@@ -9,7 +9,7 @@ func mapTo[T, V any](iter Seq[T], f func(T) V) Seq[V] {
 }
 
 func Map[T, V any](s []T, f func(T) V) Seq[V] {
-	return mapTo(makeIter(s), f)
+	return mapTo(makeSeq(s), f)
 }
 
 func (iter Seq[T]) Map(f func(T) T) Seq[T] {

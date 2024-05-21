@@ -13,7 +13,7 @@ func take[T any](iter Seq[T], n uint) Seq[T] {
 }
 
 func Take[T any](s []T, n uint) Seq[T] {
-	return take(makeIter(s), n)
+	return take(makeSeq(s), n)
 }
 
 func (iter Seq[T]) Take(n uint) Seq[T] {
@@ -33,7 +33,7 @@ func skip[T any](iter Seq[T], n uint) Seq[T] {
 }
 
 func Skip[T any](s []T, n uint) Seq[T] {
-	return skip(makeIter(s), n)
+	return skip(makeSeq(s), n)
 }
 
 func (iter Seq[T]) Skip(n uint) Seq[T] {

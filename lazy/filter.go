@@ -11,7 +11,7 @@ func filter[T any](iter Seq[T], f func(T) bool) Seq[T] {
 }
 
 func Filter[T any](s []T, f func(T) bool) Seq[T] {
-	return filter(makeIter(s), f)
+	return filter(makeSeq(s), f)
 }
 
 func (iter Seq[T]) Filter(f func(T) bool) Seq[T] {
