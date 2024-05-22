@@ -18,6 +18,10 @@ func (iter Seq[T]) Filter(f func(T) bool) Seq[T] {
 	return filter(iter, f)
 }
 
+func FilterNot[T any](sliceOrSeq any, f func(T) bool) Seq[T] {
+	return filter(parseToSeq[T](sliceOrSeq), func(t T) bool { return !f(t) })
+}
+
 func (iter Seq[T]) FilterNot(f func(T) bool) Seq[T] {
 	return filter(iter, func(t T) bool { return !f(t) })
 }
