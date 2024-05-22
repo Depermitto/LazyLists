@@ -1,8 +1,8 @@
 package lazy
 
-func (iter Seq[T]) Collect() []T {
+func (seq Seq[T]) Collect() []T {
 	s := make([]T, 0)
-	for t := range iter {
+	for t := range seq {
 		s = append(s, t)
 	}
 	return s

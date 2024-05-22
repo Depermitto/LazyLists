@@ -1,7 +1,7 @@
 package lazy
 
-func allMatch[T any](iter Seq[T], f func(T) bool) bool {
-	for t := range iter {
+func allMatch[T any](seq Seq[T], f func(T) bool) bool {
+	for t := range seq {
 		if !f(t) {
 			return false
 		}
@@ -13,13 +13,13 @@ func All[T any](sliceOrSeq any, f func(T) bool) bool {
 	return allMatch(parseToSeq[T](sliceOrSeq), f)
 }
 
-func (iter Seq[T]) All(f func(T) bool) bool {
-	return allMatch(iter, f)
+func (seq Seq[T]) All(f func(T) bool) bool {
+	return allMatch(seq, f)
 }
 
-func anyMatch[T any](iter Seq[T], f func(T) bool) bool {
-	// can it be !allMatch(iter, !f)?
-	for t := range iter {
+func anyMatch[T any](seq Seq[T], f func(T) bool) bool {
+	// can it be !allMatch(seq, !f)?
+	for t := range seq {
 		if f(t) {
 			return true
 		}
@@ -31,6 +31,6 @@ func Any[T any](sliceOrSeq any, f func(T) bool) bool {
 	return anyMatch(parseToSeq[T](sliceOrSeq), f)
 }
 
-func (iter Seq[T]) Any(f func(T) bool) bool {
-	return anyMatch(iter, f)
+func (seq Seq[T]) Any(f func(T) bool) bool {
+	return anyMatch(seq, f)
 }

@@ -1,8 +1,8 @@
 package lazy
 
-func minMaxBy[T any](iter Seq[T], cmp func(T, T) int) (min T, max T, empty bool) {
+func minMaxBy[T any](seq Seq[T], cmp func(T, T) int) (min T, max T, empty bool) {
 	empty = true
-	for t := range iter {
+	for t := range seq {
 		if empty {
 			empty = false
 			min = t
@@ -30,16 +30,16 @@ func MaxBy[T any](sliceOrSeq any, cmp func(T, T) int) (max T, empty bool) {
 	return
 }
 
-func (iter Seq[T]) MinMaxBy(cmp func(T, T) int) (min T, max T, empty bool) {
-	return minMaxBy(iter, cmp)
+func (seq Seq[T]) MinMaxBy(cmp func(T, T) int) (min T, max T, empty bool) {
+	return minMaxBy(seq, cmp)
 }
 
-func (iter Seq[T]) MinBy(cmp func(T, T) int) (min T, empty bool) {
-	min, _, empty = minMaxBy(iter, cmp)
+func (seq Seq[T]) MinBy(cmp func(T, T) int) (min T, empty bool) {
+	min, _, empty = minMaxBy(seq, cmp)
 	return
 }
 
-func (iter Seq[T]) MaxBy(cmp func(T, T) int) (max T, empty bool) {
-	_, max, empty = minMaxBy(iter, cmp)
+func (seq Seq[T]) MaxBy(cmp func(T, T) int) (max T, empty bool) {
+	_, max, empty = minMaxBy(seq, cmp)
 	return
 }
