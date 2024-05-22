@@ -10,8 +10,8 @@ func filter[T any](iter Seq[T], f func(T) bool) Seq[T] {
 	}
 }
 
-func Filter[T any](s []T, f func(T) bool) Seq[T] {
-	return filter(makeSeq(s), f)
+func Filter[T any](sliceOrSeq any, f func(T) bool) Seq[T] {
+	return filter(parseToSeq[T](sliceOrSeq), f)
 }
 
 func (iter Seq[T]) Filter(f func(T) bool) Seq[T] {

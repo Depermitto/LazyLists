@@ -16,17 +16,17 @@ func minMaxBy[T any](iter Seq[T], cmp func(T, T) int) (min T, max T, empty bool)
 	return
 }
 
-func MinMaxBy[T any](s []T, cmp func(T, T) int) (min T, max T, empty bool) {
-	return minMaxBy(makeSeq(s), cmp)
+func MinMaxBy[T any](sliceOrSeq any, cmp func(T, T) int) (min T, max T, empty bool) {
+	return minMaxBy(parseToSeq[T](sliceOrSeq), cmp)
 }
 
-func MinBy[T any](s []T, cmp func(T, T) int) (min T, empty bool) {
-	min, _, empty = minMaxBy(makeSeq(s), cmp)
+func MinBy[T any](sliceOrSeq any, cmp func(T, T) int) (min T, empty bool) {
+	min, _, empty = minMaxBy(parseToSeq[T](sliceOrSeq), cmp)
 	return
 }
 
-func MaxBy[T any](s []T, cmp func(T, T) int) (max T, empty bool) {
-	_, max, empty = minMaxBy(makeSeq(s), cmp)
+func MaxBy[T any](sliceOrSeq any, cmp func(T, T) int) (max T, empty bool) {
+	_, max, empty = minMaxBy(parseToSeq[T](sliceOrSeq), cmp)
 	return
 }
 

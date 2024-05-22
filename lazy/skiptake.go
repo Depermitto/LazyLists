@@ -12,8 +12,8 @@ func take[T any](iter Seq[T], n uint) Seq[T] {
 	}
 }
 
-func Take[T any](s []T, n uint) Seq[T] {
-	return take(makeSeq(s), n)
+func Take[T any](sliceOrSeq any, n uint) Seq[T] {
+	return take(parseToSeq[T](sliceOrSeq), n)
 }
 
 func (iter Seq[T]) Take(n uint) Seq[T] {
@@ -32,8 +32,8 @@ func skip[T any](iter Seq[T], n uint) Seq[T] {
 	}
 }
 
-func Skip[T any](s []T, n uint) Seq[T] {
-	return skip(makeSeq(s), n)
+func Skip[T any](sliceOrSeq any, n uint) Seq[T] {
+	return skip(parseToSeq[T](sliceOrSeq), n)
 }
 
 func (iter Seq[T]) Skip(n uint) Seq[T] {
