@@ -7,8 +7,8 @@ func fold[T, V any](iter Seq[T], init V, f func(acc V, t T) V) V {
 	return init
 }
 
-func Fold[T, V any](s []T, init V, f func(acc V, t T) V) V {
-	return fold(makeSeq(s), init, f)
+func Fold[T, V any](sliceOrSeq any, init V, f func(acc V, t T) V) V {
+	return fold(parseToSeq[T](sliceOrSeq), init, f)
 }
 
 func (iter Seq[T]) Fold(init T, f func(acc T, t T) T) T {
@@ -28,8 +28,8 @@ func reduce[T any](iter Seq[T], f func(acc T, t T) T) (reduced T, empty bool) {
 	return
 }
 
-func Reduce[T any](s []T, f func(acc T, t T) T) (reduced T, empty bool) {
-	return reduce(makeSeq(s), f)
+func Reduce[T any](sliceOrSeq any, f func(acc T, t T) T) (reduced T, empty bool) {
+	return reduce(parseToSeq[T](sliceOrSeq), f)
 }
 
 func (iter Seq[T]) Reduce(f func(acc T, t T) T) (reduced T, empty bool) {
