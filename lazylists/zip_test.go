@@ -12,7 +12,7 @@ var (
 
 func BenchmarkZip(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		for pair := range Zip[int, int](s1, s2) {
+		for pair := range Zip[int, int](MakeSeq(s1), MakeSeq(s2)) {
 			_ = pair
 		}
 	}

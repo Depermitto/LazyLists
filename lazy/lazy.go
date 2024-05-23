@@ -1,7 +1,7 @@
 package lazy
 
 import (
-	"Depermitto/LazyLists/lazylists"
+	"github.com/Depermitto/LazyLists/lazylists"
 	"github.com/barweiss/go-tuple"
 )
 
