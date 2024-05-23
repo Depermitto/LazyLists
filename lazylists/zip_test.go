@@ -1,4 +1,4 @@
-package lazy
+package lazylists
 
 import (
 	"math/rand/v2"

@@ -1,4 +1,4 @@
-package lazy
+package lazylists
 
 func Rev[T any](s []T) Seq[T] {
 	return func(yield func(T) bool) {

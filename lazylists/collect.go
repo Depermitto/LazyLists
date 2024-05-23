@@ -1,4 +1,4 @@
-package lazy
+package lazylists
 
 func (seq Seq[T]) Collect() []T {
 	s := make([]T, 0)

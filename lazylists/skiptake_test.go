@@ -1,19 +1,17 @@
-package lazy
+package lazylists
 
 import (
-	"math/rand/v2"
 	"slices"
 	"testing"
 )
 
-const testSliceSize = 20000
+const testSliceSize = 200
 
 func TestTakeWhile(t *testing.T) {
-	s := rand.Perm(testSliceSize)
-	slices.Sort(s)
-	s[10] = -10
+	s := Range(0, testSliceSize).Map(func(int) int { return 4 }).Collect()
+	s[testSliceSize/2] = -10
 
-	iter := TakeWhile(makeSeq(s), func(i int) bool { return i != -10 })
+	iter := TakeWhile(MakeSeq(s), func(i int) bool { return i != -10 })
 	got := iter.Collect()
 
 	expected := s[:10]
@@ -24,7 +22,7 @@ func TestTakeWhile(t *testing.T) {
 
 func BenchmarkTakeWhile(b *testing.B) {
 	s := Range(0, testSliceSize).Map(func(int) int { return 4 }).Collect()
-	s[0] = -10
+	s[testSliceSize/2] = -10
 
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {

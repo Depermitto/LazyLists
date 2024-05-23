@@ -1,4 +1,4 @@
-package lazy
+package lazylists
 
 func Generator[T any](init T, next func(T) (T, error)) Seq[T] {
 	return func(yield func(T) bool) {
@@ -17,7 +17,7 @@ func Range(a int, b int) Seq[int] {
 	}
 }
 
-func stepBy[T any](seq Seq[T], step uint) Seq[T] {
+func StepBy[T any](seq Seq[T], step uint) Seq[T] {
 	if step == 0 {
 		return nil
 	}
@@ -35,10 +35,6 @@ func stepBy[T any](seq Seq[T], step uint) Seq[T] {
 	}
 }
 
-func StepBy[T any](sliceOrSeq any, step uint) Seq[T] {
-	return stepBy(parseToSeq[T](sliceOrSeq), step)
-}
-
 func (seq Seq[T]) StepBy(step uint) Seq[T] {
-	return stepBy(seq, step)
+	return StepBy(seq, step)
 }
