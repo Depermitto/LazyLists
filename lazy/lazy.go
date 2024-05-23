@@ -25,7 +25,7 @@ func Any[T any](sliceOrSeq any, f func(T) bool) bool {
 	return lazylists.Any(parseToSeq[T](sliceOrSeq), f)
 }
 
-func Enumerate[T any](sliceOrSeq any) lazylists.Indexed[T] {
+func Enumerate[T any](sliceOrSeq any) lazylists.SeqIndexed[T] {
 	return lazylists.Enumerate(parseToSeq[T](sliceOrSeq))
 }
 
@@ -53,6 +53,14 @@ func MinBy[T any](sliceOrSeq any, cmp func(T, T) int) (min T, empty bool) {
 func MaxBy[T any](sliceOrSeq any, cmp func(T, T) int) (max T, empty bool) {
 	_, max, empty = lazylists.MinMaxBy(parseToSeq[T](sliceOrSeq), cmp)
 	return
+}
+
+func Generator[T any](init T, next func(T) (T, error)) lazylists.Seq[T] {
+	return lazylists.Generator(init, next)
+}
+
+func Range(a int, b int) lazylists.Seq[int] {
+	return lazylists.Range(a, b)
 }
 
 func StepBy[T any](sliceOrSeq any, step uint) lazylists.Seq[T] {
