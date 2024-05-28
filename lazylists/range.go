@@ -38,3 +38,21 @@ func StepBy[T any](seq Seq[T], step uint) Seq[T] {
 func (seq Seq[T]) StepBy(step uint) Seq[T] {
 	return StepBy(seq, step)
 }
+
+func (seq SeqIndexed[T]) StepBy(step uint) SeqIndexed[T] {
+	if step == 0 {
+		return nil
+	}
+
+	return func(yield func(int, T) bool) {
+		i := step
+		for index, t := range seq {
+			if i == step {
+				yield(index, t)
+				i = 1
+			} else {
+				i++
+			}
+		}
+	}
+}
