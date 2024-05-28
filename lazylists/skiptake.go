@@ -16,14 +16,14 @@ func (seq Seq[T]) Take(n uint) Seq[T] {
 	return Take(seq, n)
 }
 
-func (seq SeqIndexed[T]) Take(n uint) SeqIndexed[T] {
-	return func(yield func(int, T) bool) {
-		i := 0
-		for index, t := range seq {
-			if uint(i) < n {
-				yield(index, t)
+func (seq Seq2[I, T]) Take(n uint) Seq2[I, T] {
+	return func(yield func(I, T) bool) {
+		j := 0
+		for i, t := range seq {
+			if uint(j) < n {
+				yield(i, t)
 			}
-			i++
+			j++
 		}
 	}
 }
@@ -47,16 +47,16 @@ func (seq Seq[T]) TakeWhile(f func(T) bool) Seq[T] {
 	return TakeWhile(seq, f)
 }
 
-func (seq SeqIndexed[T]) TakeWhile(f func(index int, t T) bool) SeqIndexed[T] {
-	return func(yield func(int, T) bool) {
+func (seq Seq2[I, T]) TakeWhile(f func(I, T) bool) Seq2[I, T] {
+	return func(yield func(I, T) bool) {
 		stop := false
-		for index, t := range seq {
-			if !f(index, t) {
+		for i, t := range seq {
+			if !f(i, t) {
 				stop = true
 			}
 
 			if !stop {
-				yield(index, t)
+				yield(i, t)
 			}
 		}
 	}
@@ -78,14 +78,14 @@ func (seq Seq[T]) Skip(n uint) Seq[T] {
 	return Skip(seq, n)
 }
 
-func (seq SeqIndexed[T]) Skip(n uint) SeqIndexed[T] {
-	return func(yield func(int, T) bool) {
-		i := 0
-		for index, t := range seq {
-			if uint(i) >= n {
-				yield(index, t)
+func (seq Seq2[I, T]) Skip(n uint) Seq2[I, T] {
+	return func(yield func(I, T) bool) {
+		j := 0
+		for i, t := range seq {
+			if uint(j) >= n {
+				yield(i, t)
 			}
-			i++
+			j++
 		}
 	}
 }
@@ -109,16 +109,16 @@ func (seq Seq[T]) SkipWhile(f func(T) bool) Seq[T] {
 	return SkipWhile(seq, f)
 }
 
-func (seq SeqIndexed[T]) SkipWhile(f func(index int, t T) bool) SeqIndexed[T] {
-	return func(yield func(int, T) bool) {
+func (seq Seq2[I, T]) SkipWhile(f func(I, T) bool) Seq2[I, T] {
+	return func(yield func(I, T) bool) {
 		pass := false
-		for index, t := range seq {
-			if !f(index, t) {
+		for i, t := range seq {
+			if !f(i, t) {
 				pass = true
 			}
 
 			if pass {
-				yield(index, t)
+				yield(i, t)
 			}
 		}
 	}

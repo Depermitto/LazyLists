@@ -39,12 +39,12 @@ func (seq Seq[T]) StepBy(step uint) Seq[T] {
 	return StepBy(seq, step)
 }
 
-func (seq SeqIndexed[T]) StepBy(step uint) SeqIndexed[T] {
+func (seq Seq2[I, T]) StepBy(step uint) Seq2[I, T] {
 	if step == 0 {
 		return nil
 	}
 
-	return func(yield func(int, T) bool) {
+	return func(yield func(I, T) bool) {
 		i := step
 		for index, t := range seq {
 			if i == step {

@@ -14,8 +14,8 @@ func (seq Seq[T]) Map(f func(T) T) Seq[T] {
 	return Map(seq, f)
 }
 
-func (seq SeqIndexed[T]) Map(f func(int, T) tuple.T2[int, T]) SeqIndexed[T] {
-	return func(yield func(int, T) bool) {
+func (seq Seq2[I, T]) Map(f func(I, T) tuple.T2[I, T]) Seq2[I, T] {
+	return func(yield func(I, T) bool) {
 		for i, t := range seq {
 			both := f(i, t)
 			yield(both.V1, both.V2)

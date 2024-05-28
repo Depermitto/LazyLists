@@ -14,8 +14,8 @@ func (seq Seq[T]) Filter(f func(T) bool) Seq[T] {
 	return Filter(seq, f)
 }
 
-func (seq SeqIndexed[T]) Filter(f func(int, T) bool) SeqIndexed[T] {
-	return func(yield func(int, T) bool) {
+func (seq Seq2[I, T]) Filter(f func(I, T) bool) Seq2[I, T] {
+	return func(yield func(I, T) bool) {
 		for i, t := range seq {
 			if f(i, t) {
 				yield(i, t)
@@ -28,6 +28,6 @@ func (seq Seq[T]) FilterNot(f func(T) bool) Seq[T] {
 	return Filter(seq, func(t T) bool { return !f(t) })
 }
 
-func (seq SeqIndexed[T]) FilterNot(f func(int, T) bool) SeqIndexed[T] {
-	return seq.Filter(func(i int, t T) bool { return !f(i, t) })
+func (seq Seq2[I, T]) FilterNot(f func(I, T) bool) Seq2[I, T] {
+	return seq.Filter(func(i I, t T) bool { return !f(i, t) })
 }

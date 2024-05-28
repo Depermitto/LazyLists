@@ -10,8 +10,8 @@ func (seq Seq[T]) Collect() []T {
 	return s
 }
 
-func (seq SeqIndexed[T]) Collect() []tuple.T2[int, T] {
-	s := make([]tuple.T2[int, T], 0)
+func (seq Seq2[I, T]) Collect() []tuple.T2[I, T] {
+	s := make([]tuple.T2[I, T], 0)
 	for i, t := range seq {
 		s = append(s, tuple.New2(i, t))
 	}

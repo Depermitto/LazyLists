@@ -2,7 +2,6 @@ package lazy
 
 import (
 	"github.com/Depermitto/LazyLists/lazylists"
-	"github.com/barweiss/go-tuple"
 )
 
 func parseToSeq[T any](sliceOrSeq any) lazylists.Seq[T] {
@@ -25,7 +24,7 @@ func Any[T any](sliceOrSeq any, f func(T) bool) bool {
 	return lazylists.Any(parseToSeq[T](sliceOrSeq), f)
 }
 
-func Enumerate[T any](sliceOrSeq any) lazylists.SeqIndexed[T] {
+func Enumerate[T any](sliceOrSeq any) lazylists.Seq2[int, T] {
 	return lazylists.Enumerate(parseToSeq[T](sliceOrSeq))
 }
 
@@ -99,6 +98,6 @@ func SkipWhile[T any](sliceOrSeq any, f func(T) bool) lazylists.Seq[T] {
 	return lazylists.SkipWhile(parseToSeq[T](sliceOrSeq), f)
 }
 
-func Zip[T, U any](sliceOrSeq1 any, sliceOrSeq2 any) lazylists.Seq[tuple.T2[T, U]] {
-	return lazylists.Zip[T, U](parseToSeq[T](sliceOrSeq1), parseToSeq[U](sliceOrSeq2))
+func Zip[I, T any](sliceOrSeq1 any, sliceOrSeq2 any) lazylists.Seq2[I, T] {
+	return lazylists.Zip[I, T](parseToSeq[I](sliceOrSeq1), parseToSeq[T](sliceOrSeq2))
 }
