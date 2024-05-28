@@ -75,8 +75,12 @@ func Reduce[T any](sliceOrSeq any, f func(acc T, t T) T) (reduced T, empty bool)
 	return lazylists.Reduce(parseToSeq[T](sliceOrSeq), f)
 }
 
-func Rev[T any](s []T) lazylists.Seq[T] {
-	return lazylists.Rev(s)
+func Rev[T any](slice []T) lazylists.Seq[T] {
+	return func(yield func(T) bool) {
+		for i := len(slice) - 1; i >= 0; i-- {
+			yield(slice[i])
+		}
+	}
 }
 
 func Take[T any](sliceOrSeq any, n uint) lazylists.Seq[T] {
